@@ -77,12 +77,17 @@ class First extends StatelessWidget {
       ),
     );
 
+    void _return() {
+      Navigator.pop(context);
+    }
+
     return MaterialApp(
-      title: "Flutter App",
+      title: "Top Lakes",
       theme: ThemeData(primarySwatch: Colors.blue),
       home: Scaffold(
         appBar: AppBar(
           title: Text("Top Lakes"),
+          leading: IconButton(icon: Icon(Icons.arrow_back), onPressed: _return),
         ),
         body: ListView(
           children: <Widget>[
