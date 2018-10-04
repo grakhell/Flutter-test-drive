@@ -3,10 +3,10 @@ import 'package:flutter/rendering.dart';
 
 void main() {
   debugPaintSizeEnabled = false;
-  runApp(new MyApp());
+  runApp(new First());
 }
 
-class MyApp extends StatelessWidget {
+class First extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Widget titleSelection = Container(
@@ -31,11 +31,7 @@ class MyApp extends StatelessWidget {
                 ],
               ),
             ),
-            Icon(
-              Icons.star,
-              color: Colors.red,
-            ),
-            Text("41")
+            FavoriteWidget()
           ],
         ));
 
@@ -80,8 +76,8 @@ class MyApp extends StatelessWidget {
             "Alps." + " Situated 1,578 meters above sea level, it is one of "
             "the larger Alpine Lakes. A gondola ride from Kandersteg, " +
         "followed by a half-hour walk through pastures and pine forest, " +
-            "leads you to the lake, which warms to 20 degrees Celsius in" +
-            "the summer. Activities enjoyed here include rowing, and" +
+            "leads you to the lake, which warms to 20 degrees Celsius in " +
+            "the summer. Activities enjoyed here include rowing, and " +
         "riding the summer toboggan run.",
         softWrap: true,
       ),
@@ -107,6 +103,55 @@ class MyApp extends StatelessWidget {
           ],
         ),
       ),
+    );
+  }
+
+}
+
+class FavoriteWidget extends StatefulWidget {
+  @override
+  State<StatefulWidget> createState() => _FavoriteWidgetState();
+}
+
+class _FavoriteWidgetState extends State<FavoriteWidget> {
+
+  bool _isFavorited = true;
+  int _favoriteCount = 41;
+
+  void _toggleFavorite() {
+    setState(() {
+      if(_isFavorited) {
+        _favoriteCount -= 1;
+        _isFavorited = false;
+      } else {
+        _favoriteCount += 1;
+        _isFavorited = true;
+      }
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisSize: MainAxisSize.min,
+      children: <Widget>[
+        Container(
+          padding: EdgeInsets.all(0.0),
+          child: IconButton(
+              icon: (_isFavorited
+                  ?Icon(Icons.star)
+                  :Icon(Icons.star_border)),
+              color: Colors.red,
+              onPressed: _toggleFavorite
+          ),
+        ),
+        SizedBox(
+          width: 18.0,
+          child: Container(
+            child: Text('$_favoriteCount'),
+          ),
+        )
+      ],
     );
   }
 }
