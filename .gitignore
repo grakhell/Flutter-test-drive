@@ -13,3 +13,7 @@ build/
 test/
 
 Flutter test-drive/
+
+ios/GoogleService-Info\.plist
+
+android/app/google-services\.json
