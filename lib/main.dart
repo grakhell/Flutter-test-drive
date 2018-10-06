@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/rendering.dart';
 import 'first.dart';
 import 'second.dart';
+import 'third.dart';
 
 void main() {
   debugPaintSizeEnabled = false;
@@ -11,6 +12,7 @@ void main() {
     routes: <String, WidgetBuilder> {
       '/1' : (BuildContext context) => new First(),
       '/2' : (BuildContext context) => new Second(),
+      '/3' : (BuildContext context) => new Third(),
     },
   ));
 }
@@ -42,6 +44,10 @@ class LauncherState extends State<Launcher> {
     Navigator.pushNamed(context, '/2');
   }
 
+  void _pushToThird(){
+    Navigator.pushNamed(context, '/3');
+  }
+
   @override
   Widget build(BuildContext context) {
     return ButtonBar(
@@ -54,6 +60,10 @@ class LauncherState extends State<Launcher> {
         MaterialButton(
           child: Text("To Second"),
           onPressed: _pushToSecond,
+        ),
+        MaterialButton(
+          child: Text("To Third"),
+          onPressed: _pushToThird,
         )
       ],
     );
