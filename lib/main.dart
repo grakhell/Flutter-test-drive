@@ -20,6 +20,7 @@ final ThemeData kDefaultTheme = new ThemeData(
 void main() {
   debugPaintSizeEnabled = false;
   runApp(new MaterialApp(
+    title: "Flutter test-drive",
     home: LauncherApp(),
     theme:
         defaultTargetPlatform == TargetPlatform.iOS ? kIOSTheme : kDefaultTheme,
