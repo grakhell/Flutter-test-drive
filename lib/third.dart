@@ -2,10 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class Third extends StatelessWidget {
-
   @override
   Widget build(BuildContext context) {
-      return new Container(
+    return new Container(
       child: ListPage(title: "Baby names"),
     );
   }
@@ -27,39 +26,37 @@ class ListPage extends StatelessWidget {
         padding: const EdgeInsets.all(10.0),
         child: new Row(
           children: <Widget>[
-            new Expanded(
-                child: new Text(document['name'])
-            ),
+            new Expanded(child: new Text(document['name'])),
             new Text(document['votes'].toString())
           ],
         ),
       ),
-      onTap: () =>
-          Firestore.instance.runTransaction( (transaction) async {
-          DocumentSnapshot freshSnap = await transaction.get(document
-              .reference);
-          await transaction.update(freshSnap.reference, {'votes':
-          freshSnap['votes'] + 1});
-        }),
+      onTap: () => Firestore.instance.runTransaction((transaction) async {
+            DocumentSnapshot freshSnap =
+                await transaction.get(document.reference);
+            await transaction
+                .update(freshSnap.reference, {'votes': freshSnap['votes'] + 1});
+          }),
     );
   }
 
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
-      appBar: new AppBar(title: new Text(title),),
+      appBar: new AppBar(
+        title: new Text(title),
+      ),
       body: new StreamBuilder(
           stream: Firestore.instance.collection('baby').snapshots(),
           builder: (context, snapshot) {
             if (!snapshot.hasData) return const Text("Loading... ");
             return new ListView.builder(
-              itemCount: snapshot.data.documents.length,
-              padding: const EdgeInsets.only(top: 10.0),
-              itemExtent: 55.0,
-              itemBuilder: (context, index) => _buildListItem(context,snapshot.data.documents[index])
-            );
-          }
-      ),
+                itemCount: snapshot.data.documents.length,
+                padding: const EdgeInsets.only(top: 10.0),
+                itemExtent: 55.0,
+                itemBuilder: (context, index) =>
+                    _buildListItem(context, snapshot.data.documents[index]));
+          }),
     );
   }
 }

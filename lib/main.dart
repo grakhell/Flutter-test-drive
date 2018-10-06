@@ -1,18 +1,32 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/rendering.dart';
+import 'package:flutter/foundation.dart';
 import 'first.dart';
 import 'second.dart';
 import 'third.dart';
+
+final ThemeData kIOSTheme = new ThemeData(
+  primarySwatch: Colors.orange,
+  primaryColor: Colors.grey,
+  primaryColorBrightness: Brightness.light,
+);
+
+final ThemeData kDefaultTheme = new ThemeData(
+  primarySwatch: Colors.purple,
+  accentColor: Colors.orangeAccent,
+);
 
 void main() {
   debugPaintSizeEnabled = false;
   runApp(new MaterialApp(
     home: LauncherApp(),
-    routes: <String, WidgetBuilder> {
-      '/1' : (BuildContext context) => new First(),
-      '/2' : (BuildContext context) => new Second(),
-      '/3' : (BuildContext context) => new Third(),
+    theme:
+        defaultTargetPlatform == TargetPlatform.iOS ? kIOSTheme : kDefaultTheme,
+    routes: <String, WidgetBuilder>{
+      '/1': (BuildContext context) => new First(),
+      '/2': (BuildContext context) => new Second(),
+      '/3': (BuildContext context) => new Third(),
     },
   ));
 }
@@ -21,10 +35,10 @@ class LauncherApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: new AppBar(
-          title: const Text("Flutter test-drive"),
-        ),
-        body: new Launcher(),
+      appBar: new AppBar(
+        title: const Text("Flutter test-drive"),
+      ),
+      body: new Launcher(),
     );
   }
 }
@@ -35,7 +49,6 @@ class Launcher extends StatefulWidget {
 }
 
 class LauncherState extends State<Launcher> {
-
   void _pushToFirst() {
     Navigator.pushNamed(context, '/1');
   }
@@ -44,7 +57,7 @@ class LauncherState extends State<Launcher> {
     Navigator.pushNamed(context, '/2');
   }
 
-  void _pushToThird(){
+  void _pushToThird() {
     Navigator.pushNamed(context, '/3');
   }
 

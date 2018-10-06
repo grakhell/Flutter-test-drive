@@ -67,7 +67,8 @@ class First extends StatelessWidget {
       padding: const EdgeInsets.all(32.0),
       child: Text(
         "Lake Oeschinen lies at the foot of the Blüemlisalp in the Bernese "
-            "Alps." + " Situated 1,578 meters above sea level, it is one of "
+            "Alps." +
+            " Situated 1,578 meters above sea level, it is one of "
             "the larger Alpine Lakes. A gondola ride from Kandersteg, " +
             "followed by a half-hour walk through pastures and pine forest, " +
             "leads you to the lake, which warms to 20 degrees Celsius in " +
@@ -81,10 +82,8 @@ class First extends StatelessWidget {
       Navigator.pop(context);
     }
 
-    return MaterialApp(
-      title: "Top Lakes",
-      theme: ThemeData(primarySwatch: Colors.blue),
-      home: Scaffold(
+    return Container(
+      child: Scaffold(
         appBar: AppBar(
           title: Text("Top Lakes"),
           leading: IconButton(icon: Icon(Icons.arrow_back), onPressed: _return),
@@ -104,7 +103,6 @@ class First extends StatelessWidget {
       ),
     );
   }
-
 }
 
 class FavoriteWidget extends StatefulWidget {
@@ -113,13 +111,12 @@ class FavoriteWidget extends StatefulWidget {
 }
 
 class _FavoriteWidgetState extends State<FavoriteWidget> {
-
   bool _isFavorited = true;
   int _favoriteCount = 41;
 
   void _toggleFavorite() {
     setState(() {
-      if(_isFavorited) {
+      if (_isFavorited) {
         _favoriteCount -= 1;
         _isFavorited = false;
       } else {
@@ -137,12 +134,9 @@ class _FavoriteWidgetState extends State<FavoriteWidget> {
         Container(
           padding: EdgeInsets.all(0.0),
           child: IconButton(
-              icon: (_isFavorited
-                  ?Icon(Icons.star)
-                  :Icon(Icons.star_border)),
+              icon: (_isFavorited ? Icon(Icons.star) : Icon(Icons.star_border)),
               color: Colors.red,
-              onPressed: _toggleFavorite
-          ),
+              onPressed: _toggleFavorite),
         ),
         SizedBox(
           width: 18.0,
